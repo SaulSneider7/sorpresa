@@ -96,7 +96,7 @@
         🔊 Silenciar
     </button>
 
-    <h1>Cartas del 13 al 23 de junio 💖</h1>
+    <h1>Pistas al Corazón: Descubre Mi Sorpresa 💖</h1>
     <div class="grid" id="grid"></div>
 
     <div class="modal" id="modal">
@@ -126,11 +126,11 @@
         const pistas = {
             '2025-06-16': { texto: 'Puedo estar en tu bolsillo y combinar con cualquier outfit' },
             '2025-06-17': { texto: 'No tengo pantalla, pero puedes verme todos los días.' },
-            '2025-06-18': { texto: 'Soy una prueba de confianza guardada con estilo.' },
+            '2025-06-18': { texto: 'Me has visto en nuestros viajes, pero no soy un mapa.' },
             '2025-06-19': { texto: 'Me entregan como premio, pero no soy medalla.' },
-            '2025-06-20': { texto: 'Guardo secretos que no se suben a la nube.' },
-            '2025-06-21': { texto: 'Mi diseño es delgado y elegante, pero no soy wearable.' },
-            '2025-06-22': { texto: 'No me cargo con batería, pero puedo agotarte.' },
+            '2025-06-20': { texto: 'Toda la informacion se suben a la nube.' },
+            '2025-06-21': { texto: 'Mi diseño es delgado y elegante, pero no soy una prenda.' },
+            '2025-06-22': { texto: 'No me cargo con batería, pero puedo agotarme.' },
             '2025-06-23': { texto: 'Mi brillo no es de píxeles ni de diamantes, pero llama la atención.' },
             '2025-06-24': { texto: 'Soy silenciosa, pero al tocarme, algo se activa.' },
             '2025-06-25': { texto: 'No tengo conexión Wi-Fi, pero igual abro muchas puertas.' },
@@ -177,7 +177,7 @@
                         const pista = pistas[dateStr];
                         modalContent.innerHTML = `<h2>${displayDate}</h2><p> <b> Pista: </b> ${pista?.texto || '¡Te amo!'}</p>`;
                     } else {
-                        modalContent.innerHTML = `<p>Esta carta estará disponible el ${displayDate} 💌</p>`;
+                        modalContent.innerHTML = `<p>Esta pista estará disponible el ${displayDate} 💌</p>`;
                     }
                     modal.style.display = 'flex';
                 };
