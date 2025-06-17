@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cartas para Ti 💌</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Dancing Script', cursive;
+            background: #ffeaf4;
+            color: #5e2c3c;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            width: 100%;
+            max-width: 800px;
+        }
+
+        .card {
+            background: #fff0f6;
+            border: 2px solid #ffb3c6;
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            cursor: pointer;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+        }
+
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.6);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .modal-content img {
+            max-width: 100%;
+            border-radius: 10px;
+            margin-top: 10px;
+        }
+
+        audio {
+            position: fixed;
+            bottom: 10px;
+            left: 10px;
+            z-index: 100;
+        }
+    </style>
+</head>
+
+<body>
+    <button id="playBtn"
+        style="padding: 10px 20px; font-size: 18px; background-color: pink; border: none; border-radius: 10px;">
+        💌 Haz clic para comenzar
+    </button>
+
+    <button id="muteBtn"
+        style="display: none; margin-top: 10px; padding: 8px 16px; font-size: 16px; background-color: #ffcce0; border: none; border-radius: 10px;">
+        🔊 Silenciar
+    </button>
+
+    <h1>Cartas del 13 al 23 de junio 💖</h1>
+    <div class="grid" id="grid"></div>
+
+    <div class="modal" id="modal">
+        <div class="modal-content" id="modal-content"></div>
+    </div>
+
+    <audio id="musica" loop>
+        <source src="Karina.mp3" type="audio/mp3">
+        Tu navegador no soporta audio HTML5.
+    </audio>
+
+    <script>
+        document.getElementById('playBtn').addEventListener('click', () => {
+            const audio = document.getElementById('musica');
+            const muteBtn = document.getElementById('muteBtn');
+
+            audio.play();
+            document.getElementById('playBtn').style.display = 'none';
+            muteBtn.style.display = 'inline-block';
+
+            muteBtn.addEventListener('click', () => {
+                audio.muted = !audio.muted;
+                muteBtn.textContent = audio.muted ? '🔇 Activar sonido' : '🔊 Silenciar';
+            });
+        });
+
+        const pistas = {
+            '2025-06-16': { texto: 'Puedo estar en tu bolsillo y combinar con cualquier outfit' },
+            '2025-06-17': { texto: 'No tengo pantalla, pero puedes verme todos los días.' },
+            '2025-06-18': { texto: 'Soy una prueba de confianza guardada con estilo.' },
+            '2025-06-19': { texto: 'Me entregan como premio, pero no soy medalla.' },
+            '2025-06-20': { texto: 'Guardo secretos que no se suben a la nube.' },
+            '2025-06-21': { texto: 'Mi diseño es delgado y elegante, pero no soy wearable.' },
+            '2025-06-22': { texto: 'No me cargo con batería, pero puedo agotarte.' },
+            '2025-06-23': { texto: 'Mi brillo no es de píxeles ni de diamantes, pero llama la atención.' },
+            '2025-06-24': { texto: 'Soy silenciosa, pero al tocarme, algo se activa.' },
+            '2025-06-25': { texto: 'No tengo conexión Wi-Fi, pero igual abro muchas puertas.' },
+            '2025-06-26': { texto: 'Estoy en tu bolsillo, pero no soy un smartphone.' },
+            '2025-06-27': { texto: 'Mi estructura no es metálica, pero refleja poder.' },
+            '2025-06-28': { texto: 'No tengo zafiros, pero muchos me ven como un lujo.' },
+            '2025-06-29': { texto: 'No aparezco en Google, pero todos quieren tenerme.' },
+            '2025-06-30': { texto: 'No soy gadget, pero tengo funciones especiales.' },
+            '2025-07-01': { texto: 'Mi valor no se mide en quilates, pero sí en límites.' },
+            '2025-07-02': { texto: 'No tengo cámara, pero puedo captar miradas.' },
+            '2025-07-03': { texto: 'Soy parte del estilo de quien sabe moverse en el mundo.' },
+            '2025-07-04': { texto: 'No soy sitio web, pero puedes navegar con mi ayuda.' },
+            '2025-07-05': { texto: 'El dorado me decora, pero no soy joya.' },
+            '2025-07-06': { texto: 'Mi interfaz no es digital, pero tengo números que importan.' },
+            '2025-07-07': { texto: 'Mi color sugiere riqueza; mi uso, responsabilidad.' },
+            '2025-07-08': { texto: 'Soy delgada, poderosa, y con un toque de oro… ¿ya sabes quién soy?' }
+        };
+
+        const grid = document.getElementById('grid');
+            const modal = document.getElementById('modal');
+            const modalContent = document.getElementById('modal-content');
+
+            const now = new Date();
+            const today = `${now.getFullYear()}-${(now.getMonth() + 1).toString().padStart(2, '0')}-${now.getDate().toString().padStart(2, '0')}`;
+
+            const startDate = new Date(2025, 5, 16); // 16 junio 2025 (mes 5 porque enero=0)
+            const endDate = new Date(2025, 6, 8);   // 8 julio 2025
+
+            let currentDate = new Date(startDate);
+
+            while (currentDate <= endDate) {
+                const yyyy = currentDate.getFullYear();
+                const mm = (currentDate.getMonth() + 1).toString().padStart(2, '0');
+                const dd = currentDate.getDate().toString().padStart(2, '0');
+                const dateStr = `${yyyy}-${mm}-${dd}`;
+                const displayDate = `${dd}/${mm}/2025`;
+
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.innerText = `💌 ${displayDate}`;
+
+                card.onclick = () => {
+                    if (today === dateStr) {
+                        const pista = pistas[dateStr];
+                        modalContent.innerHTML = `<h2>${displayDate}</h2><p> <b> Pista: </b> ${pista?.texto || '¡Te amo!'}</p>`;
+                    } else {
+                        modalContent.innerHTML = `<p>Esta carta estará disponible el ${displayDate} 💌</p>`;
+                    }
+                    modal.style.display = 'flex';
+                };
+
+                grid.appendChild(card);
+
+                currentDate.setDate(currentDate.getDate() + 1);
+            }
+
+
+
+        modal.onclick = () => {
+            modal.style.display = 'none';
+        };
+    </script>
+
+</body>
+
+</html>

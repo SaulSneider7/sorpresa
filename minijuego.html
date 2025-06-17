@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minijuego del Amor 💘</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background: #fff0f5;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        #contador {
+            position: fixed;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 24px;
+            background: #ffb6c1;
+            padding: 10px 20px;
+            border-radius: 10px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .corazon {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background-image: url('https://e7.pngegg.com/pngimages/980/717/png-clipart-heart-red-heart.png');
+            background-size: cover;
+            cursor: pointer;
+            animation: flotar 5s linear forwards;
+        }
+
+        @keyframes flotar {
+            0% {
+                top: -50px;
+            }
+
+            100% {
+                top: 110%;
+            }
+        }
+
+        #mensajeFinal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            border: 2px solid #ff69b4;
+            padding: 30px;
+            border-radius: 15px;
+            font-size: 20px;
+            box-shadow: 0 0 20px rgba(255, 105, 180, 0.4);
+        }
+    </style>
+</head>
+
+<body>
+    <div id="contador">Corazones atrapados: 0/10</div>
+    <div id="mensajeFinal">
+        ✨ ¡Felicidades! Has ganado tu pista extra:<br>
+        <strong>"No todo lo que brilla es oro, pero esto te llevará directo al tesoro."</strong>
+    </div>
+
+    <script>
+        let atrapados = 0;
+        const total = 10;
+
+        function crearCorazon() {
+            const corazon = document.createElement('div');
+            corazon.classList.add('corazon');
+            corazon.style.left = Math.random() * 90 + 'vw';
+            document.body.appendChild(corazon);
+
+            corazon.onclick = () => {
+                atrapados++;
+                document.getElementById('contador').innerText = `Corazones atrapados: ${atrapados}/${total}`;
+                corazon.remove();
+
+                if (atrapados >= total) {
+                    document.getElementById('mensajeFinal').style.display = 'block';
+                }
+            };
+
+            setTimeout(() => corazon.remove(), 5000);
+        }
+
+        setInterval(() => {
+            if (atrapados < total) crearCorazon();
+        }, 800);
+    </script>
+</body>
+
+</html>

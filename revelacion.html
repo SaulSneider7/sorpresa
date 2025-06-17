@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>🎁 Tu Sorpresa</title>
+    <style>
+        #confetti-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Dancing Script', cursive, sans-serif;
+            background: linear-gradient(to right, #fff0f5, #fff0f5);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            text-align: center;
+            overflow-x: hidden;
+            z-index: 1;
+        }
+
+        h1 {
+            font-size: 6vw;
+            color: #d63384;
+            margin: 20px 10px 10px;
+            animation: fadeInDown 1.5s ease;
+        }
+
+        p {
+            font-size: 4.5vw;
+            color: #6c1e45;
+            margin: 0 20px;
+            max-width: 600px;
+            animation: fadeIn 2s ease;
+        }
+
+        img {
+            width: 80%;
+            max-width: 320px;
+            border-radius: 15px;
+            margin-top: 20px;
+            animation: zoomIn 2s ease;
+            box-shadow: 0 0 15px rgba(255, 105, 180, 0.4);
+        }
+
+        canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        @keyframes fadeInDown {
+            0% {
+                opacity: 0;
+                transform: translateY(-40px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes zoomIn {
+            from {
+                transform: scale(0.5);
+                opacity: 0;
+            }
+
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        @media (min-width: 768px) {
+            h1 {
+                font-size: 3em;
+            }
+
+            p {
+                font-size: 1.5em;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="confetti-canvas"></canvas>
+
+    <h1>💛 ¡Sorpresa Revelada! 💛</h1>
+    <p>
+        Has descubierto el secreto más brillante...<br />
+        <strong>Una tarjeta dorada muy especial está en camino para ti ✨</strong>
+    </p>
+    <img src="tarjeta_de_credito.webp" alt="Tarjeta dorada sorpresa" />
+
+    <script>
+        const canvas = document.getElementById('confetti-canvas');
+        const ctx = canvas.getContext('2d');
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        const confettis = Array.from({ length: 100 }, () => ({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height - canvas.height,
+            r: Math.random() * 6 + 4,
+            dx: Math.random() * 2 - 1,
+            dy: Math.random() * 2 + 1.5,
+            color: `hsl(${Math.floor(Math.random() * 360)}, 100%, 75%)`
+        }));
+
+        function drawConfetti() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (const c of confettis) {
+                ctx.beginPath();
+                ctx.fillStyle = c.color;
+                ctx.arc(c.x, c.y, c.r, 0, Math.PI * 2);
+                ctx.fill();
+                c.x += c.dx;
+                c.y += c.dy;
+                if (c.y > canvas.height) {
+                    c.y = -10;
+                    c.x = Math.random() * canvas.width;
+                }
+            }
+            requestAnimationFrame(drawConfetti);
+        }
+
+        drawConfetti();
+    </script>
+</body>
+
+</html>
