@@ -147,7 +147,7 @@
             '2025-07-05': { texto: 'El dorado me decora, pero no soy joya.' },
             '2025-07-06': { texto: 'Mi interfaz no es digital, pero tengo números que importan.' },
             '2025-07-07': { texto: 'Mi color sugiere riqueza; mi uso, responsabilidad.' },
-            '2025-07-08': { texto: 'Soy delgada, poderosa, y con un toque de oro… ¿ya sabes quién soy?' }
+            '2025-07-08': { texto: '<a href="revelacion.html">Revelar sorpresa</a>' }
         };
 
         const grid = document.getElementById('grid');
@@ -174,7 +174,7 @@
                 card.innerText = `💌 ${displayDate}`;
 
                 card.onclick = () => {
-                    if (today === dateStr) {
+                    if (true) {
                         const pista = pistas[dateStr];
                         modalContent.innerHTML = `<h2>${displayDate}</h2><p> <b> Pista: </b> ${pista?.texto || '¡Te amo!'}</p>`;
                     } else {
